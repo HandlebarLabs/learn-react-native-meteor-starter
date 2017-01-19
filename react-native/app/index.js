@@ -7,8 +7,12 @@ import {
   TabNavigationItem as TabItem,
 } from '@exponent/ex-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Meteor from 'react-native-meteor';
+import config from './config/config';
 import Router from './config/router';
 import colors from './config/colors';
+
+Meteor.connect(config.SERVER_URL);
 
 const renderIcon = (isSelected, name, title) => {
   const color = isSelected ? colors.primary : colors.iconSubtle;
