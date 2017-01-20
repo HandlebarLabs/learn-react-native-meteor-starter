@@ -1,6 +1,7 @@
 /* eslint-disable no-console, no-undef */
 
 import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
 import { Locations } from '../../api/locations/locations';
 
 Meteor.startup(() => {
@@ -18,6 +19,7 @@ Meteor.startup(() => {
 
     fuelStations.fuel_stations.forEach((location) => {
       bulkLocationsOp.insert({
+        _id: (new Mongo.ObjectID())._str,
         ...location,
         location: { type: 'Point', coordinates: [location.longitude, location.latitude] },
       });
