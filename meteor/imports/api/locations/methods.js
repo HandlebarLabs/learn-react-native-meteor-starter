@@ -9,7 +9,18 @@ export const getNearestLocations = new ValidatedMethod({
     longitude: { type: Number, decimal: true },
   }).validator(),
   run({ latitude, longitude }) {
-    console.log(latitude, longitude);
-    return Locations.find({}, { limit: 10 }).fetch();
+    const query = {
+      location: {
+        $near: {
+          $geometry: {
+            type: 'Point',
+            coordinates: [longitude, latitude],
+          },
+          $minDistance: 0,
+        },
+      },
+    };
+
+    return Locations.find(query, { limit: 10 }).fetch();
   },
 });
