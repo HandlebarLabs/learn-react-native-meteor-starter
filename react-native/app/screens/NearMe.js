@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { List, ListItem } from 'react-native-elements';
 import Container from '../components/Container';
+import Router from '../config/router';
 
 class NearMe extends Component {
   static route = {
@@ -12,7 +13,12 @@ class NearMe extends Component {
 
   static propTypes = {
     route: PropTypes.object,
+    navigator: PropTypes.object,
   }
+
+  goToLocationDetails = (location) => {
+    this.props.navigator.push(Router.getRoute('locationDetails', { location }));
+  };
 
   subTitle = (location) => {
     let subtitle = '';
@@ -41,6 +47,7 @@ class NearMe extends Component {
                 key={l._id}
                 title={l.station_name}
                 subtitle={this.subTitle(l)}
+                onPress={() => this.goToLocationDetails(l)}
               />
             ))
           }
