@@ -7,7 +7,7 @@ import {
   TabNavigationItem as TabItem,
 } from '@exponent/ex-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Meteor from 'react-native-meteor';
+import Meteor, { createContainer } from 'react-native-meteor';
 import config from './config/config';
 import Router from './config/router';
 import colors from './config/colors';
@@ -70,4 +70,8 @@ App.propTypes = {
   user: PropTypes.object,
 };
 
-export default App;
+export default createContainer(() => {
+  return {
+    user: Meteor.user(),
+  };
+}, App);
