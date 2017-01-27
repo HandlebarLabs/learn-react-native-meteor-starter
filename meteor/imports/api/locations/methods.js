@@ -34,33 +34,56 @@ export const changeCheckinStatus = new ValidatedMethod({
     status: { type: String, allowedValues: ['in', 'out'] },
   }).validator(),
   run({ locationId, status }) {
-    const location = Locations.findOne({ _id: locationId });
+    if (!this.userId) {
+      throw new Meteor.Error('Locations.changeCheckin.notLoggedIn',
+        'Must be logged in to change checkin status.');
+    }
 
+    const location = Locations.findOne({ _id: locationId });
     if (!location) {
       throw new Meteor.Error('Locations.changeCheckin.invalidLocationId',
         'Must pass a valid location id to change checkin status.');
     }
 
+    if (status === 'in' && location.checkedInUserId === this.userId) {
+      throw new Meteor.Error('Locations.changeCheckin.checkedInByUser',
+        'You\'re already checked in at this location.');
+    }
+
+    if (status === 'in' && typeof location.checkedInUserId === 'string') {
+      throw new Meteor.Error('Locations.changeCheckin.checkedInByDifferentUser',
+        'Someone is already checked in at this location.');
+    }
+
+    if (status === 'out' && location.checkedInUserId !== this.userId) {
+      throw new Meteor.Error('Locations.changeCheckin.notCheckedInHere',
+        'You\'re not checked into this location.');
+    }
+
+    const existingCheckin = Locations.findOne({ checkedInUserId: this.userId });
+    if (status === 'in' && existingCheckin) {
+      throw new Meteor.Error('Locations.changeCheckin.checkedInElsewhere',
+        'You\'re already checked in at a different location.');
+    }
+
     if (status === 'in') {
       Locations.update({ _id: locationId }, {
         $set: {
-          checkedInUserId: 'demo', // TEMPORARY
-          updatedAt: new Date(),
+          checkedInUserId: this.userId,
         },
       });
     } else {
       Locations.update({ _id: locationId }, {
         $set: {
           checkedInUserId: null,
-          updatedAt: new Date(),
         },
       });
     }
 
     Activity.insert({
       createdAt: new Date(),
-      username: 'demo',
-      userId: 'demo',
+      username: Meteor.user().username,
+      userId: this.userId,
       type: status,
       locationId,
     });

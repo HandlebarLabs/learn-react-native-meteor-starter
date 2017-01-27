@@ -19,6 +19,8 @@ class LocationDetails extends Component {
     navigator: PropTypes.object,
     activityReady: PropTypes.bool,
     activity: PropTypes.array,
+    user: PropTypes.object,
+    navigation: PropTypes.object,
   }
 
   constructor(props) {
@@ -36,13 +38,19 @@ class LocationDetails extends Component {
       status = CHECKED_OUT;
     }
 
-    this.setState({ changingStatus: true });
-    Meteor.call('Locations.changeCheckin', { locationId: location._id, status }, (err) => {
-      if (err) {
-        this.props.navigator.showLocalAlert(err.reason, config.errorStyles);
-      }
-      this.setState({ changingStatus: false });
-    });
+    if (this.props.user !== null) {
+      this.setState({ changingStatus: true });
+      Meteor.call('Locations.changeCheckin', { locationId: location._id, status }, (err) => {
+        if (err) {
+          this.props.navigator.showLocalAlert(err.reason, config.errorStyles);
+        }
+        this.setState({ changingStatus: false });
+      });
+    } else {
+      this.props.navigation.performAction(({ tabs }) => {
+        tabs('main').jumpToTab('account');
+      });
+    }
   };
 
   renderItems = () => {
