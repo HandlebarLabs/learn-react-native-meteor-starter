@@ -4,6 +4,7 @@ import MapView from 'react-native-maps';
 import Container from '../components/Container';
 import Router from '../config/router';
 import FloatingButton from '../components/FloatingButton';
+import MapCallout, { styles as mapCalloutStyles } from '../components/MapCallout';
 
 class NearMe extends Component {
   static route = {
@@ -56,7 +57,29 @@ class NearMe extends Component {
             longitudeDelta: 0.0421,
           }}
           showsUserLocation
-        />
+        >
+          {locations.map((location) => {
+            const [longitude, latitude] = location.location.coordinates;
+            return (
+              <MapView.Marker
+                key={location._id}
+                coordinate={{ latitude, longitude }}
+              >
+                <MapView.Callout
+                  style={mapCalloutStyles.calloutContainer}
+                  tooltip
+                  onPress={() => this.goToLocationDetails(location)}
+                >
+                  <MapCallout
+                    title={location.station_name}
+                    description={this.subTitle(location)}
+                    onPress={() => this.goToLocationDetails(location)}
+                  />
+                </MapView.Callout>
+              </MapView.Marker>
+            );
+          })}
+        </MapView>
         <FloatingButton
           icon="list"
           onPress={this.replaceScreen}
