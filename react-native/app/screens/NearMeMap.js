@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { View } from 'react-native';
-import { List, ListItem } from 'react-native-elements';
+import { Text } from 'react-native';
 import Container from '../components/Container';
 import Router from '../config/router';
 import FloatingButton from '../components/FloatingButton';
@@ -9,7 +8,7 @@ class NearMe extends Component {
   static route = {
     navigationBar: {
       visible: true,
-      title: 'Near Me',
+      title: 'Near Me Map',
     },
   }
 
@@ -24,7 +23,7 @@ class NearMe extends Component {
 
   replaceScreen = () => {
     const { locations, position } = this.props.route.params;
-    this.props.navigator.replace(Router.getRoute('nearMeMap', { locations, position }));
+    this.props.navigator.replace(Router.getRoute('nearMe', { locations, position }));
   };
 
   subTitle = (location) => {
@@ -46,29 +45,15 @@ class NearMe extends Component {
     const { locations } = this.props.route.params;
 
     return (
-      <View>
-        <Container scroll>
-          <List>
-            {
-              locations.map((l) => (
-                <ListItem
-                  key={l._id}
-                  title={l.station_name}
-                  subtitle={this.subTitle(l)}
-                  onPress={() => this.goToLocationDetails(l)}
-                />
-              ))
-            }
-          </List>
-        </Container>
+      <Container>
+        <Text>Near Me Map</Text>
         <FloatingButton
-          icon="map"
+          icon="list"
           onPress={this.replaceScreen}
         />
-      </View>
+      </Container>
     );
   }
 }
-
 
 export default NearMe;

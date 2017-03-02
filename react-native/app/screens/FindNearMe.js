@@ -36,7 +36,7 @@ class FindNearMe extends Component {
       if (err) {
         this.props.navigator.showLocalAlert(err.reason, config.errorStyles);
       } else {
-        this.props.navigator.push(Router.getRoute('nearMe', { locations }));
+        this.props.navigator.push(Router.getRoute('nearMe', { locations, position }));
       }
       this.setState({ loading: false });
     });
