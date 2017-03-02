@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { Text } from 'react-native';
+import { StyleSheet } from 'react-native';
+import MapView from 'react-native-maps';
 import Container from '../components/Container';
 import Router from '../config/router';
 import FloatingButton from '../components/FloatingButton';
@@ -42,11 +43,20 @@ class NearMe extends Component {
   };
 
   render() {
-    const { locations } = this.props.route.params;
+    const { locations, position } = this.props.route.params;
 
     return (
       <Container>
-        <Text>Near Me Map</Text>
+        <MapView
+          style={{ ...StyleSheet.absoluteFillObject }}
+          initialRegion={{
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+          showsUserLocation
+        />
         <FloatingButton
           icon="list"
           onPress={this.replaceScreen}
