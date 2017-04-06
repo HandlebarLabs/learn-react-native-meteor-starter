@@ -45,14 +45,12 @@ export const changeCheckinStatus = new ValidatedMethod({
       Locations.update({ _id: locationId }, {
         $set: {
           checkedInUserId: 'demo', // TEMPORARY
-          updatedAt: new Date(),
         },
       });
     } else {
       Locations.update({ _id: locationId }, {
         $set: {
           checkedInUserId: null,
-          updatedAt: new Date(),
         },
       });
     }
