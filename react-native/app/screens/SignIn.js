@@ -3,7 +3,6 @@ import { Card } from 'react-native-elements';
 import Meteor from 'react-native-meteor';
 import Container from '../components/Container';
 import { Input, PrimaryButton } from '../components/Form';
-import config from '../config/config';
 import Router from '../config/router';
 import { connectAlert } from '../components/Alert';
 
