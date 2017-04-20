@@ -4,7 +4,7 @@ import { Accounts } from 'react-native-meteor';
 import Container from '../components/Container';
 import { Input, PrimaryButton, SecondaryButton } from '../components/Form';
 import Router from '../config/router';
-import config from '../config/config';
+import { connectAlert } from '../components/Alert';
 
 class SignUp extends Component {
   static route = {
@@ -16,6 +16,7 @@ class SignUp extends Component {
 
   static propTypes = {
     navigator: PropTypes.object,
+    alertWithType: PropTypes.func,
   }
 
   constructor(props) {
@@ -48,22 +49,22 @@ class SignUp extends Component {
     const { email, username, password, confirmPassword } = this.state;
 
     if (email.length === 0) {
-      return this.props.navigator.showLocalAlert('Email is required.', config.errorStyles);
+      return this.props.alertWithType('error', 'Error', 'Email is required.');
     }
 
     if (username.length === 0) {
-      return this.props.navigator.showLocalAlert('Username is required.', config.errorStyles);
+      return this.props.alertWithType('error', 'Error', 'Username is required.');
     }
 
     if (password.length === 0 || password !== confirmPassword) {
-      return this.props.navigator.showLocalAlert('Passwords must match.', config.errorStyles);
+      return this.props.alertWithType('error', 'Error', 'Passwords must match.');
     }
 
     this.setState({ loading: true });
     return Accounts.createUser({ username, email, password }, (err) => {
       this.setState({ loading: false });
       if (err) {
-        this.props.navigator.showLocalAlert(err.reason, config.errorStyles);
+        this.props.alertWithType('error', 'Error', err.reason);
       } else {
         this.props.navigator.immediatelyResetStack([Router.getRoute('profile')]);
       }
@@ -117,4 +118,4 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+export default connectAlert(SignUp);
