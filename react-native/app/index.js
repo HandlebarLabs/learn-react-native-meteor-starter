@@ -11,6 +11,7 @@ import Meteor from 'react-native-meteor';
 import config from './config/config';
 import Router from './config/router';
 import colors from './config/colors';
+import { AlertProvider } from './components/Alert';
 
 Meteor.connect(config.SERVER_URL);
 
@@ -35,34 +36,36 @@ const renderIcon = (isSelected, name, title) => {
 const App = ({ user }) => {
   const accountRoute = user ? Router.getRoute('profile') : Router.getRoute('signUp');
   return (
-    <NavigationProvider router={Router}>
-      <TabNavigation
-        id="main"
-        navigatorUID="main"
-        initialTab="home"
-      >
-        <TabItem
-          id="home"
-          renderIcon={(isSelected) => renderIcon(isSelected, 'home', 'Home')}
+    <AlertProvider>
+      <NavigationProvider router={Router}>
+        <TabNavigation
+          id="main"
+          navigatorUID="main"
+          initialTab="home"
         >
-          <StackNavigation
+          <TabItem
             id="home"
-            navigatorUID="home"
-            initialRoute={Router.getRoute('findNearMe')}
-          />
-        </TabItem>
-        <TabItem
-          id="account"
-          renderIcon={(isSelected) => renderIcon(isSelected, 'account-circle', 'Account')}
-        >
-          <StackNavigation
+            renderIcon={(isSelected) => renderIcon(isSelected, 'home', 'Home')}
+          >
+            <StackNavigation
+              id="home"
+              navigatorUID="home"
+              initialRoute={Router.getRoute('findNearMe')}
+            />
+          </TabItem>
+          <TabItem
             id="account"
-            navigatorUID="account"
-            initialRoute={accountRoute}
-          />
-        </TabItem>
-      </TabNavigation>
-    </NavigationProvider>
+            renderIcon={(isSelected) => renderIcon(isSelected, 'account-circle', 'Account')}
+          >
+            <StackNavigation
+              id="account"
+              navigatorUID="account"
+              initialRoute={accountRoute}
+            />
+          </TabItem>
+        </TabNavigation>
+      </NavigationProvider>
+    </AlertProvider>
   );
 };
 
