@@ -6,9 +6,9 @@ import Meteor, { createContainer } from 'react-native-meteor';
 import moment from 'moment';
 import Container from '../components/Container';
 import colors from '../config/colors';
-import config from '../config/config';
 import NotFound from '../components/NotFound';
 import { Header } from '../components/Text';
+import { connectAlert } from '../components/Alert';
 
 const CHECKED_IN = 'in';
 const CHECKED_OUT = 'out';
@@ -16,9 +16,9 @@ const CHECKED_OUT = 'out';
 class LocationDetails extends Component {
   static propTypes = {
     location: PropTypes.object,
-    navigator: PropTypes.object,
     activityReady: PropTypes.bool,
     activity: PropTypes.array,
+    alertWithType: PropTypes.func,
   }
 
   constructor(props) {
@@ -39,7 +39,7 @@ class LocationDetails extends Component {
     this.setState({ changingStatus: true });
     Meteor.call('Locations.changeCheckin', { locationId: location._id, status }, (err) => {
       if (err) {
-        this.props.navigator.showLocalAlert(err.reason, config.errorStyles);
+        this.props.alertWithType('error', 'Error', err.reason);
       }
       this.setState({ changingStatus: false });
     });
@@ -137,4 +137,4 @@ ConnectedLocationDetails.route = {
   },
 };
 
-export default ConnectedLocationDetails;
+export default connectAlert(ConnectedLocationDetails);
