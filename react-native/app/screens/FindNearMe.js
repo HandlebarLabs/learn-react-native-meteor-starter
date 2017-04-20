@@ -33,7 +33,7 @@ class FindNearMe extends Component {
     this.setState({ loading: true });
     Meteor.call('Locations.getNearestLocations', params, (err, locations) => {
       if (err) {
-        this.props.navigator.showLocalAlert(err.reason, config.errorStyles);
+        this.props.alertWithType('error', 'Error', err.reason);
       } else {
         console.log('locations', locations);
       }
