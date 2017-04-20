@@ -5,6 +5,7 @@ import Container from '../components/Container';
 import { Input, PrimaryButton } from '../components/Form';
 import config from '../config/config';
 import Router from '../config/router';
+import { connectAlert } from '../components/Alert';
 
 class SignIn extends Component {
   static route = {
@@ -16,6 +17,7 @@ class SignIn extends Component {
 
   static propTypes = {
     navigator: PropTypes.object,
+    alertWithType: PropTypes.func,
   }
 
   constructor(props) {
@@ -31,18 +33,18 @@ class SignIn extends Component {
     const { emailOrUsername, password } = this.state;
 
     if (emailOrUsername.length === 0) {
-      return this.props.navigator.showLocalAlert('Email or username is required.', config.errorStyles);
+      return this.props.alertWithType('error', 'Error', 'Email or username is required.');
     }
 
     if (password.length === 0) {
-      return this.props.navigator.showLocalAlert('Password is required.', config.errorStyles);
+      return this.props.alertWithType('error', 'Error', 'Password is required.');
     }
 
     this.setState({ loading: true });
     return Meteor.loginWithPassword(emailOrUsername, password, (err) => {
       this.setState({ loading: false });
       if (err) {
-        this.props.navigator.showLocalAlert(err.reason, config.errorStyles);
+        this.props.alertWithType('error', 'Error', err.reason);
       } else {
         this.props.navigator.immediatelyResetStack([Router.getRoute('profile')]);
       }
@@ -77,4 +79,4 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+export default connectAlert(SignIn);
