@@ -13,7 +13,7 @@ class LocationDetails extends Component {
 
   render() {
     console.log(this.props.location);
-    const location = this.props.location || _.get(this.props, 'route.params.location', {});
+    const location = this.props.location || _.get(this.props, 'navigation.state.params.location', {});
     const userId = _.get(this.props, 'user._id', '');
     const checkedIn = location.checkedInUserId === userId;
     const available = typeof location.checkedInUserId !== 'string';
