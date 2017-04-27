@@ -1,29 +1,25 @@
 import React, { Component, PropTypes } from 'react';
 import { Text } from 'react-native';
 import Container from '../components/Container';
-import Router from '../config/router';
 import FloatingButton from '../components/FloatingButton';
 
-class NearMe extends Component {
-  static route = {
-    navigationBar: {
-      visible: true,
-      title: 'Near Me Map',
-    },
-  }
-
+class NearMeMap extends Component {
   static propTypes = {
-    route: PropTypes.object,
-    navigator: PropTypes.object,
+    navigation: PropTypes.object,
   }
 
   goToLocationDetails = (location) => {
-    this.props.navigator.push(Router.getRoute('locationDetails', { location }));
+    this.props.navigation.navigate('LocationDetails', { location });
   };
 
   replaceScreen = () => {
-    const { locations, position } = this.props.route.params;
-    this.props.navigator.replace(Router.getRoute('nearMe', { locations, position }));
+    const { locations, position } = this.props.navigation.state.params;
+    this.props.navigation.dispatch({
+      key: 'NearMe',
+      type: 'ReplaceCurrentScreen',
+      routeName: 'NearMe',
+      params: { locations, position },
+    });
   };
 
   subTitle = (location) => {
@@ -42,7 +38,7 @@ class NearMe extends Component {
   };
 
   render() {
-    const { locations } = this.props.route.params;
+    const { locations } = this.props.navigation.state.params;
 
     return (
       <Container>
@@ -56,4 +52,4 @@ class NearMe extends Component {
   }
 }
 
-export default NearMe;
+export default NearMeMap;
