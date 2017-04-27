@@ -63,11 +63,4 @@ const ConnectedLocationDetails = createContainer((params) => {
   };
 }, LocationDetails);
 
-ConnectedLocationDetails.route = {
-  navigationBar: {
-    visible: true,
-    title: 'Location Details',
-  },
-};
-
 export default ConnectedLocationDetails;
