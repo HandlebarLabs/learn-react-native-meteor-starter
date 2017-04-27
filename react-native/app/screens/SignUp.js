@@ -2,18 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import { Card } from 'react-native-elements';
 import Container from '../components/Container';
 import { Input, PrimaryButton, SecondaryButton } from '../components/Form';
-import Router from '../config/router';
 
 class SignUp extends Component {
-  static route = {
-    navigationBar: {
-      visible: true,
-      title: 'Sign Up',
-    },
-  }
-
   static propTypes = {
-    navigator: PropTypes.object,
+    navigation: PropTypes.object,
   }
 
   constructor(props) {
@@ -38,7 +30,7 @@ class SignUp extends Component {
   };
 
   goToSignIn = () => {
-    this.props.navigator.push(Router.getRoute('signIn'));
+    this.props.navigation.navigate('SignIn');
   };
 
   render() {
