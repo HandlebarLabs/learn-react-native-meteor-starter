@@ -17,7 +17,7 @@
     "react-native": "0.43.4",
     "react-native-dropdownalert": "2.7.1",
     "react-native-elements": "0.11.2",
-    "react-native-maps": "^0.13.0",
+    "react-native-maps": "0.13.0",
     "react-native-meteor": "1.0.3",
     "react-native-platform-stylesheet": "0.0.6",
     "react-native-vector-icons": "4.0.0",
