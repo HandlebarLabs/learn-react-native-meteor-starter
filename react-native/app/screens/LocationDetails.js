@@ -41,7 +41,7 @@ class LocationDetails extends Component {
   };
 
   render() {
-    const location = this.props.location || _.get(this.props, 'route.params.location', {});
+    const location = this.props.location || _.get(this.props, 'navigation.state.params.location', {});
     const userId = _.get(this.props, 'user._id', '');
     const checkedIn = location.checkedInUserId === userId;
     const available = typeof location.checkedInUserId !== 'string';
@@ -83,7 +83,7 @@ class LocationDetails extends Component {
 }
 
 const ConnectedLocationDetails = createContainer((params) => {
-  const location = _.get(params, 'route.params.location', {});
+  const location = _.get(params, 'navigation.state.params.location', {});
 
   Meteor.subscribe('Locations.pub.details', { locationId: location._id });
 
@@ -92,12 +92,5 @@ const ConnectedLocationDetails = createContainer((params) => {
     location: Meteor.collection('locations').findOne({ _id: location._id }),
   };
 }, LocationDetails);
-
-ConnectedLocationDetails.route = {
-  navigationBar: {
-    visible: true,
-    title: 'Location Details',
-  },
-};
 
 export default connectAlert(ConnectedLocationDetails);
