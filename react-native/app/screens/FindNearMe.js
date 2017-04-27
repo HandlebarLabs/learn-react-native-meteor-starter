@@ -3,19 +3,12 @@ import Meteor from 'react-native-meteor';
 import Container from '../components/Container';
 import { Header } from '../components/Text';
 import LocateMeButton from '../components/LocateMeButton';
-import Router from '../config/router';
 import { connectAlert } from '../components/Alert';
 
 class FindNearMe extends Component {
-  static route = {
-    navigationBar: {
-      visible: false,
-    },
-  }
-
   static propTypes = {
     alertWithType: PropTypes.func,
-    navigator: PropTypes.object,
+    navigation: PropTypes.object,
   }
 
   constructor(props) {
@@ -37,7 +30,7 @@ class FindNearMe extends Component {
       if (err) {
         this.props.alertWithType('error', 'Error', err.reason);
       } else {
-        this.props.navigator.push(Router.getRoute('nearMe', { locations }));
+        this.props.navigation.navigate('NearMe', { locations });
       }
       this.setState({ loading: false });
     });

@@ -3,15 +3,8 @@ import { List, ListItem } from 'react-native-elements';
 import Container from '../components/Container';
 
 class NearMe extends Component {
-  static route = {
-    navigationBar: {
-      visible: true,
-      title: 'Near Me',
-    },
-  }
-
   static propTypes = {
-    route: PropTypes.object,
+    navigation: PropTypes.object,
   }
 
   subTitle = (location) => {
@@ -30,7 +23,7 @@ class NearMe extends Component {
   };
 
   render() {
-    const { locations } = this.props.route.params;
+    const { locations } = this.props.navigation.state.params;
 
     return (
       <Container scroll>
