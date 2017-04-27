@@ -3,6 +3,13 @@ import Container from '../components/Container';
 import { Header } from '../components/Text';
 
 class SignIn extends Component {
+  static route = {
+    navigationBar: {
+      visible: true,
+      title: 'Sign In',
+    },
+  }
+
   render() {
     return (
       <Container>
