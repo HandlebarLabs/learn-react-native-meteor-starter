@@ -47,9 +47,7 @@ class LocationDetails extends Component {
         this.setState({ changingStatus: false });
       });
     } else {
-      this.props.navigation.performAction(({ tabs }) => {
-        tabs('main').jumpToTab('account');
-      });
+      this.props.navigation.navigate('Account');
     }
   };
 
