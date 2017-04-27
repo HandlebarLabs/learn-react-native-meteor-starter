@@ -1,25 +1,25 @@
 import React, { Component, PropTypes } from 'react';
 import Meteor from 'react-native-meteor';
-import Router from '../config/router';
+import { NavigationActions } from 'react-navigation';
 import Container from '../components/Container';
 import { Header } from '../components/Text';
 import { PrimaryButton } from '../components/Form';
 
 class Profile extends Component {
-  static route = {
-    navigationBar: {
-      visible: true,
-      title: 'Profile',
-    },
-  }
-
   static propTypes = {
-    navigator: PropTypes.object,
+    navigation: PropTypes.object,
   }
 
   signOut = () => {
-    Meteor.logout();
-    this.props.navigator.immediatelyResetStack([Router.getRoute('signUp')]);
+    Meteor.logout(() => {
+      const resetAction = NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'SignUp' }),
+        ],
+      });
+      this.props.navigation.dispatch(resetAction);
+    });
   };
 
   render() {

@@ -4,13 +4,6 @@ import Container from '../components/Container';
 import { Input, PrimaryButton } from '../components/Form';
 
 class SignIn extends Component {
-  static route = {
-    navigationBar: {
-      visible: true,
-      title: 'Sign In',
-    },
-  }
-
   constructor(props) {
     super(props);
 
