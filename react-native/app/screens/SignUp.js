@@ -1,22 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import { Card } from 'react-native-elements';
 import { Accounts } from 'react-native-meteor';
+import { NavigationActions } from 'react-navigation';
 import Container from '../components/Container';
 import { Input, PrimaryButton, SecondaryButton } from '../components/Form';
-import Router from '../config/router';
 import { connectAlert } from '../components/Alert';
 
 class SignUp extends Component {
-  static route = {
-    navigationBar: {
-      visible: true,
-      title: 'Sign Up',
-    },
-  }
-
   static propTypes = {
-    navigator: PropTypes.object,
     alertWithType: PropTypes.func,
+    navigation: PropTypes.object,
   }
 
   constructor(props) {
@@ -42,7 +35,7 @@ class SignUp extends Component {
   };
 
   goToSignIn = () => {
-    this.props.navigator.push(Router.getRoute('signIn'));
+    this.props.navigation.navigate('SignIn');
   };
 
   signUp = () => {
@@ -66,7 +59,13 @@ class SignUp extends Component {
       if (err) {
         this.props.alertWithType('error', 'Error', err.reason);
       } else {
-        this.props.navigator.immediatelyResetStack([Router.getRoute('profile')]);
+        const resetAction = NavigationActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'Profile' }),
+          ],
+        });
+        this.props.navigation.dispatch(resetAction);
       }
     });
   };
