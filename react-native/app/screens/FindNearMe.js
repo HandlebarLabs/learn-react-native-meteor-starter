@@ -5,12 +5,6 @@ import LocateMeButton from '../components/LocateMeButton';
 import { connectAlert } from '../components/Alert';
 
 class FindNearMe extends Component {
-  static route = {
-    navigationBar: {
-      visible: false,
-    },
-  }
-
   static propTypes = {
     alertWithType: PropTypes.func,
   }
