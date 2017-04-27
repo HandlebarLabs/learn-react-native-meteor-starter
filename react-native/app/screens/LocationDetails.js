@@ -53,7 +53,7 @@ class LocationDetails extends Component {
 }
 
 const ConnectedLocationDetails = createContainer((params) => {
-  const location = _.get(params, 'route.params.location', {});
+  const location = _.get(params, 'navigation.state.params.location', {});
 
   Meteor.subscribe('Locations.pub.details', { locationId: location._id });
 
