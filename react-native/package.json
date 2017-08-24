@@ -9,30 +9,30 @@
     "lint:fix": "eslint app/ --fix"
   },
   "dependencies": {
-    "color": "1.0.3",
-    "hoist-non-react-statics": "1.2.0",
-    "lodash": "4.17.4",
-    "moment": "2.17.1",
-    "react": "16.0.0-alpha.6",
-    "react-native": "0.43.4",
-    "react-native-dropdownalert": "2.7.1",
-    "react-native-elements": "0.11.2",
-    "react-native-meteor": "1.0.3",
-    "react-native-platform-stylesheet": "0.0.6",
-    "react-native-vector-icons": "4.0.0",
-    "react-navigation": "1.0.0-beta.9"
+    "color": "^2.0.0",
+    "hoist-non-react-statics": "^2.3.0",
+    "lodash": "^4.17.4",
+    "moment": "^2.17.1",
+    "react": "16.0.0-alpha.12",
+    "react-native": "0.47.2",
+    "react-native-dropdownalert": "^2.7.1",
+    "react-native-elements": "^0.16.0",
+    "react-native-meteor": "^1.0.3",
+    "react-native-platform-stylesheet": "^0.0.6",
+    "react-native-vector-icons": "^4.0.0",
+    "react-navigation": "^1.0.0-beta.11"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
-    "babel-jest": "19.0.0",
-    "babel-preset-react-native": "1.9.1",
-    "eslint": "^3.13.1",
-    "eslint-config-airbnb": "^14.0.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.9.0",
-    "jest": "19.0.2",
-    "react-test-renderer": "15.4.2"
+    "babel-jest": "^20.0.3",
+    "babel-preset-react-native": "^3.0.1",
+    "eslint": "^4.5.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.1.0",
+    "jest": "^20.0.4",
+    "react-test-renderer": "^15.4.2"
   },
   "jest": {
     "preset": "react-native"
