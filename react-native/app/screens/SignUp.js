@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { Card } from 'react-native-elements';
 import Container from '../components/Container';
 import { Input, PrimaryButton, SecondaryButton } from '../components/Form';
