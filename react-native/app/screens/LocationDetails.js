@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { Text } from 'react-native';
 import { Button, Card } from 'react-native-elements';
 import _ from 'lodash';
