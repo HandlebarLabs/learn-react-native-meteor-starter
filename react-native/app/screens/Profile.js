@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import Meteor from 'react-native-meteor';
 import { NavigationActions } from 'react-navigation';
 import Container from '../components/Container';
