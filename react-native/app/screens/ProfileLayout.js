@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import Meteor, { createContainer } from 'react-native-meteor';
+import Meteor, { withTracker } from 'react-native-meteor';
 
 import Profile from './Profile';
 import SignUp from './SignUp';
@@ -17,8 +17,8 @@ ProfileLayout.propTypes = {
   user: PropTypes.object,
 };
 
-export default createContainer(() => {
+export default withTracker(() => {
   return {
     user: Meteor.user(),
   };
-}, ProfileLayout);
+})(ProfileLayout);
