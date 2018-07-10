@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export, react/prop-types */
 import React from 'react';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import FindNearMe from '../screens/FindNearMe';
@@ -11,7 +11,7 @@ import SignUp from '../screens/SignUp';
 import ProfileLayout from '../screens/ProfileLayout';
 import Profile from '../screens/Profile';
 
-export const HomeStack = createStackNavigator({
+export const HomeStack = StackNavigator({
   FindNearMe: {
     screen: FindNearMe,
     navigationOptions: {
@@ -51,7 +51,7 @@ HomeStack.router = {
   },
 };
 
-export const ProfileStack = createStackNavigator({
+export const ProfileStack = StackNavigator({
   ProfileLayout: {
     screen: ProfileLayout,
     navigationOptions: {
@@ -80,7 +80,7 @@ export const ProfileStack = createStackNavigator({
   headerMode: 'screen',
 });
 
-export const Tabs = createBottomTabNavigator({
+export const Tabs = TabNavigator({
   Home: {
     screen: HomeStack,
     navigationOptions: {
@@ -109,4 +109,5 @@ export const Tabs = createBottomTabNavigator({
   },
 }, {
   tabBarPosition: 'bottom',
+  tabBarComponent: TabBarBottom,
 });
