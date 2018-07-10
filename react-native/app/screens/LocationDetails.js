@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Text } from 'react-native';
 import { Button, Card, List, ListItem } from 'react-native-elements';
 import _ from 'lodash';
-import Meteor, { createContainer } from 'react-native-meteor';
+import Meteor, { withTracker } from 'react-native-meteor';
 import moment from 'moment';
 import Container from '../components/Container';
 import colors from '../config/colors';
@@ -123,7 +123,7 @@ class LocationDetails extends Component {
   }
 }
 
-const ConnectedLocationDetails = createContainer((params) => {
+const ConnectedLocationDetails = withTracker((params) => {
   const location = _.get(params, 'navigation.state.params.location', {});
 
   Meteor.subscribe('Locations.pub.details', { locationId: location._id });
