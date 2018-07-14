@@ -62,6 +62,6 @@ const ConnectedLocationDetails = withTracker((params) => {
     user: Meteor.user(),
     location: Meteor.collection('locations').findOne({ _id: location._id }),
   };
-}, LocationDetails);
+})(LocationDetails);
 
 export default ConnectedLocationDetails;
