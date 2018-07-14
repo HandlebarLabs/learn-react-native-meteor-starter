@@ -129,6 +129,6 @@ const ConnectedLocationDetails = withTracker((params) => {
     activityReady: activityHandle.ready(),
     activity: Meteor.collection('activity').find({ locationId: location._id }, { sort: { createdAt: -1 } }),
   };
-}, LocationDetails);
+})(LocationDetails);
 
 export default connectAlert(ConnectedLocationDetails);
