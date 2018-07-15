@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Meteor from 'react-native-meteor';
-import { NavigationActions } from 'react-navigation';
+import { NavigationActions, StackActions } from 'react-navigation';
 import Container from '../components/Container';
 import { Header } from '../components/Text';
 import { PrimaryButton } from '../components/Form';
@@ -13,7 +13,7 @@ class Profile extends Component {
 
   signOut = () => {
     Meteor.logout(() => {
-      const resetAction = NavigationActions.reset({
+      const resetAction = StackActions.reset({
         index: 0,
         actions: [
           NavigationActions.navigate({ routeName: 'SignUp' }),
