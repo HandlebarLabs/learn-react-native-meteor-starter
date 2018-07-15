@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Card } from 'react-native-elements';
 import { Accounts } from 'react-native-meteor';
-import { NavigationActions } from 'react-navigation';
+import { NavigationActions, StackActions } from 'react-navigation';
 import Container from '../components/Container';
 import { Input, PrimaryButton, SecondaryButton } from '../components/Form';
 import { connectAlert } from '../components/Alert';
@@ -60,7 +60,7 @@ class SignUp extends Component {
       if (err) {
         this.props.alertWithType('error', 'Error', err.reason);
       } else {
-        const resetAction = NavigationActions.reset({
+        const resetAction = StackActions.reset({
           index: 0,
           actions: [
             NavigationActions.navigate({ routeName: 'Profile' }),
